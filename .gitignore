@@ -1,0 +1,32 @@
+# --- Python Basics ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# --- Virtual Environments ---
+# It is best practice NOT to upload your venv folder
+venv/
+env/
+.env/
+.venv/
+
+# --- Distribution / Installer (if you use PyInstaller later) ---
+build/
+dist/
+*.spec
+
+# --- IDEs / Editors ---
+.vscode/
+.idea/
+*.swp
+
+# --- Windows specific ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Logs ---
+*.log
