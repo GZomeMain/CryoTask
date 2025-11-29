@@ -9,7 +9,7 @@
 
 **Freeze heavy applications to stop CPU usage or Trim their memory to free up RAM.**
 
-[⬇️ Download Latest Version](https://github.com/GZome/CryoTask/releases) • [🐛 Report Bug](https://github.com/GZome/CryoTask/issues)
+[⬇️ Download Latest Version](https://github.com/GZomeMain/CryoTask/releases) • [🐛 Report Bug](https://github.com/GZomeMain/CryoTask/issues)
 
 <br>
 <!-- Ensure you have a file named screenshot.png inside your assets folder -->
@@ -37,7 +37,7 @@ It combines the functionality of a **Process Freezer** (pausing execution) and a
 
 ### Option 1: Executable (Recommended for Users)
 No coding knowledge required.
-1.  Go to the [Releases Page](https://github.com/GZome/CryoTask/releases).
+1.  Go to the [Releases Page](https://github.com/GZomeMain/CryoTask/releases).
 2.  Download the latest `CryoTask.zip`.
 3.  Extract and run `CryoTask.exe` as **Administrator**.
 
