@@ -1,0 +1,8 @@
+{
+  "periodic_trim": {},
+  "ram_threshold": {
+    "enabled": false,
+    "threshold": 80,
+    "apps": []
+  }
+}
