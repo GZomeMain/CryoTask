@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Downloads](https://img.shields.io/github/downloads/GZomeMain/CryoTask/total?style=flat&color=orange)
 
-**Freeze heavy applications to stop CPU usage or Trim their memory to free up RAM.**
+**Freeze heavy applications to stop CPU usage, or Trim their memory to free up RAM.**
 
 [⬇️ Download Latest Version](https://github.com/GZomeMain/CryoTask/releases) • [🐛 Report Bug](https://github.com/GZomeMain/CryoTask/issues)
 
@@ -21,18 +21,20 @@
 
 ## 🚀 Overview
 
-**CryoTask** is a lightweight Windows utility designed to give you control over your system resources. Whether you have a game running in the background, a heavy IDE, or a RAM-hungry browser, CryoTask helps you reclaim performance without closing your apps.
+**CryoTask** is a lightweight Windows utility designed to give you precise control over your system resources. Whether you have a game running in the background, a heavy IDE, or a RAM-hungry browser, CryoTask helps you reclaim performance without closing your apps.
 
-It combines the functionality of a **Process Freezer** (pausing execution) and a **Memory Cleaner** (like Mem Reduct) into one modern, dark-themed interface.
+The modern "Card View" interface provides a real-time system overview, displaying current CPU usage, total processes, and a detailed RAM usage bar. It combines the functionality of a **Process Freezer** (pausing execution) and a **Memory Cleaner** (like Mem Reduct) into one application.
 
 ## ✨ Features
 
-*   **❄️ Suspend (Freeze) Apps:** Completely pause an application's processes. This drops its CPU usage to **0%**, stopping battery drain and heat generation while keeping the app open.
-*   **🧹 Smart RAM Trimming:** Uses native Windows APIs to force applications to release unused memory (Working Set) back to the OS.
-*   **🧠 Group Awareness:** Automatically detects multi-process applications (like **Google Chrome, Discord, VS Code**) and manages the entire group at once. No more suspending just the "frame" while the background tabs keep eating RAM.
-*   **💾 State Persistence:** Remembers which apps you suspended, even after you close and reopen CryoTask.
-*   **🎨 Modern UI:** Built with `CustomTkinter` for a clean, Windows 11-style dark mode interface.
-*   **🛡️ Safety Filters:** Only lists applications with visible windows to prevent accidental suspension of critical system services.
+* **❄️ Suspend (Freeze) Apps:** Completely pause an application's processes. This drops its CPU usage to **0%**, stopping battery drain and heat generation while keeping the app open.
+* **🧹 Smart RAM Trimming:** Uses native Windows APIs to force applications to release unused memory (Working Set) back to the OS.
+* **🕐 Scheduling:** Set up **Periodic Trim** to automatically clean an application's memory every few minutes, ensuring low RAM usage without manual intervention.
+* **🧠 Group Awareness:** Automatically detects multi-process applications (like **Google Chrome, Discord, VS Code**) and manages the entire group at once.
+* **⭐ Pinning:** Pin your most frequently used processes to the top of the list for instant access.
+* **🛡️ Safe Mode & Advanced Control:** Defaults to **Safe Mode**, which filters out critical system services. Switch to **Advanced Mode** to view and manage all active processes.
+* **💾 State Persistence:** Remembers suspended apps, pinned favorites, and scheduled actions even after you close and reopen CryoTask.
+* **🎨 Modern UI:** Built with `CustomTkinter` for a clean, Windows 11-style dark mode interface featuring interactive status dots and high-DPI scaling.
 
 ## 📥 Installation
 
@@ -45,7 +47,7 @@ No coding knowledge required.
 ### Option 2: Run from Source (For Developers)
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/GZomeMain/CryoTask.git
+    git clone [https://github.com/GZomeMain/CryoTask.git](https://github.com/GZomeMain/CryoTask.git)
     cd CryoTask
     ```
 
@@ -55,7 +57,7 @@ No coding knowledge required.
     ```
 
 3.  **Run the application:**
-    *   *Note: You must run your terminal/CMD as Administrator for memory trimming to work.*
+    * *Note: You must run your terminal/CMD as Administrator for memory trimming to work.*
     ```bash
     python main.py
     ```
@@ -80,7 +82,7 @@ If you want to compile the `.exe` yourself:
 
 ## ⚠️ Disclaimer
 
-While CryoTask filters out system processes, suspending or trimming the memory of unstable applications or active anti-cheat software may cause crashes. **Use responsibly.**
+While CryoTask's Safe Mode and filters help prevent accidental issues, suspending or trimming the memory of unstable applications or active anti-cheat software may still cause crashes. **Use responsibly.**
 
 ## 📄 License
 
