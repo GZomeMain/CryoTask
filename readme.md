@@ -29,6 +29,7 @@ The modern "Card View" interface provides a real-time system overview, displayin
 
 * **❄️ Suspend (Freeze) Apps:** Completely pause an application's processes. This drops its CPU usage to **0%**, stopping battery drain and heat generation while keeping the app open.
 * **🧹 Smart RAM Trimming:** Uses native Windows APIs to force applications to release unused memory (Working Set) back to the OS.
+* **⚡ Presets:** Create and save custom presets with multiple apps and actions (Suspend, Trim, or both). Apply them with one click for instant resource management.
 * **🕐 Scheduling:** Set up **Periodic Trim** to automatically clean an application's memory every few minutes, ensuring low RAM usage without manual intervention.
 * **🧠 Group Awareness:** Automatically detects multi-process applications (like **Google Chrome, Discord, VS Code**) and manages the entire group at once.
 * **⭐ Pinning:** Pin your most frequently used processes to the top of the list for instant access.
@@ -47,7 +48,7 @@ No coding knowledge required.
 ### Option 2: Run from Source (For Developers)
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/GZomeMain/CryoTask.git](https://github.com/GZomeMain/CryoTask.git)
+    git clone https://github.com/GZomeMain/CryoTask.git
     cd CryoTask
     ```
 
