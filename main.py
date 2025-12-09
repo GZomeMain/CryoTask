@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 App Suspender & RAM Optimizer
 Style: "Card View" (Image 2 Reference)
@@ -2154,3 +2155,6 @@ if __name__ == "__main__":
         traceback.print_exc()
         print(f"Error: {e}")
         input("Press Enter to close...")
+=======
+ATTACH:577d9483-099e-4b62-ae87-0e8a347c88cd
+>>>>>>> 236cbec317fa64e99a76156121fbdcfafef274a3
