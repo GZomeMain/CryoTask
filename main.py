@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 App Suspender & RAM Optimizer
 Style: "Card View" (Image 2 Reference)
@@ -67,9 +66,9 @@ EXCLUDED_PROCESSES = frozenset([
 # To translate, duplicate this dict with translated values.
 class Strings:
     # App Info
-    APP_TITLE = "CryoTask - Process Manager & RAM Optimizer"
+    APP_TITLE = "CryoTask"
     APP_NAME = "⚡ CryoTask"
-    APP_SUBTITLE = "Process Manager"
+    APP_SUBTITLE = ""
     
     # Buttons
     BTN_REFRESH = "⟳ Refresh"
@@ -1060,7 +1059,7 @@ class PresetsDialog(ctk.CTkToplevel):
 class AppSuspender(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("CryoTask - Process Manager & RAM Optimizer")
+        self.title("CryoTask")
         self.geometry("1000x750")
         self.minsize(800, 600)
         self.configure(fg_color=ModernTheme.BG_ROOT)
@@ -1122,10 +1121,6 @@ class AppSuspender(ctk.CTk):
         ctk.CTkLabel(title_frame, text=Strings.APP_NAME, font=ModernTheme.FONTS["header"], 
                      text_color=ModernTheme.TEXT_MAIN).pack(side="left")
         
-        subtitle = ctk.CTkLabel(title_frame, text=Strings.APP_SUBTITLE, 
-                               font=ModernTheme.FONTS["sub"], 
-                               text_color=ModernTheme.TEXT_SUB)
-        subtitle.pack(side="left", padx=(12, 0))
 
         # Refresh button - Pill Shape
         self.refresh_btn = ctk.CTkButton(self.header_frame, text=Strings.BTN_REFRESH, width=110, height=38,
@@ -2155,6 +2150,3 @@ if __name__ == "__main__":
         traceback.print_exc()
         print(f"Error: {e}")
         input("Press Enter to close...")
-=======
-ATTACH:577d9483-099e-4b62-ae87-0e8a347c88cd
->>>>>>> 236cbec317fa64e99a76156121fbdcfafef274a3
