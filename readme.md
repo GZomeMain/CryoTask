@@ -13,7 +13,7 @@
 [⬇️ Download Latest Version](https://github.com/GZomeMain/CryoTask/releases) • [🐛 Report Bug](https://github.com/GZomeMain/CryoTask/issues)
 
 <br>
-<img src="assets/screenshot.png" alt="CryoTask Screenshot" width="700" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"/>
+<img src="assets/screenshot.png?v=2" alt="CryoTask Screenshot" width="700" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"/>
 <br>
 <br>
 
