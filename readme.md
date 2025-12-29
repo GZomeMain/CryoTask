@@ -15,9 +15,19 @@
 <br>
 <img src="assets/screenshot.png?v=2" alt="CryoTask Screenshot" width="700" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"/>
 <br>
-<br>
 
 </div>
+
+---
+
+> [!IMPORTANT]  
+> ### ⚠️ Safety & Technical Considerations
+> **CryoTask is a Power-User utility.** It utilizes the `SuspendThread` and `EmptyWorkingSet` Windows APIs to reclaim system resources. 
+> - **Deadlocks:** Freezing a process that holds a system synchronization object (Mutex) can cause that specific application to hang.
+> - **Safe Mode:** By default, CryoTask only displays apps with **visible desktop windows** and explicitly blocks critical system processes (like `explorer.exe`).
+> - **Intended Use:** Designed for user-mode apps (Browsers, Launchers, IDEs). Avoid using it on system services, drivers, or active anti-cheat software.
+
+---
 
 ## 🚀 Overview
 
@@ -47,19 +57,17 @@ No coding knowledge required.
 
 ### Option 2: Run from Source (For Developers)
 1.  **Clone the repository:**
-    ```bash
+    ```
     git clone https://github.com/GZomeMain/CryoTask.git
     cd CryoTask
     ```
-
 2.  **Install dependencies:**
-    ```bash
+    ```
     pip install -r requirements.txt
     ```
-
 3.  **Run the application:**
     * *Note: You must run your terminal/CMD as Administrator for memory trimming to work.*
-    ```bash
+    ```
     python main.py
     ```
 
@@ -68,7 +76,7 @@ No coding knowledge required.
 CryoTask interacts directly with the Windows API to perform its functions:
 
 1.  **Suspending:** It utilizes `win32api` and `SuspendThread`. It iterates through every thread of the target process and pauses execution. The OS stops scheduling CPU time for these threads until resumed.
-2.  **Trimming:** It calls `psapi.dll` -> `EmptyWorkingSet`. This instructs Windows to move the data currently in the application's RAM (Working Set) to the Pagefile (Disk), freeing up physical RAM for other tasks. The app will reload this data from disk only when needed.
+2.  **Trimming:** It calls `psapi.dll` -> `EmptyWorkingSet`. This instructs Windows to move the data currently in the application's RAM (Working Set) to the Pagefile (Disk), freeing up physical RAM for other tasks.
 
 ## 🛠️ Build it Yourself
 
@@ -76,14 +84,14 @@ If you want to compile the `.exe` yourself:
 
 1.  Install PyInstaller: `pip install pyinstaller`
 2.  Run the included build script:
-    ```bash
+    ```
     python build.py
     ```
 3.  The executable will appear in the `dist` folder.
 
 ## ⚠️ Disclaimer
 
-While CryoTask's Safe Mode and filters help prevent accidental issues, suspending or trimming the memory of unstable applications or active anti-cheat software may still cause crashes. **Use responsibly.**
+While CryoTask's Safe Mode and filters help prevent accidental issues, suspending or trimming the memory of unstable applications or active anti-cheat software may still cause crashes. **Use responsibly.** This software is provided "as is," without warranty of any kind.
 
 ## 📄 License
 
