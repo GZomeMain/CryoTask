@@ -1,8 +1,27 @@
 {
-  "periodic_trim": {},
+  "periodic_trim": {
+    "vivaldi.exe": {
+      "interval": 2,
+      "enabled": true,
+      "last_run": 1779729850.698162
+    },
+    "javaw.exe": {
+      "interval": 15,
+      "enabled": true,
+      "last_run": 1779729144.6523187
+    },
+    "zen.exe": {
+      "enabled": true,
+      "interval": 15,
+      "last_run": 1779729274.9273689
+    }
+  },
   "ram_threshold": {
-    "enabled": false,
-    "threshold": 80,
-    "apps": []
+    "enabled": true,
+    "threshold": 90,
+    "apps": [
+      "zen.exe",
+      "My Dystopian Robot Girlfriend.exe"
+    ]
   }
 }

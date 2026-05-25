@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryoTask</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo">❄️</div>
+                <div class="brand-name">
+                    <h1>CryoTask</h1>
+                    <span>SYSTEM OPTIMIZER</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <button class="menu-item active" data-tab="dashboard">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-label">Dashboard</span>
+                </button>
+                <button class="menu-item" data-tab="processes">
+                    <span class="menu-icon">⚙️</span>
+                    <span class="menu-label">Processes</span>
+                </button>
+                <button class="menu-item" data-tab="presets">
+                    <span class="menu-icon">⚡</span>
+                    <span class="menu-label">Presets</span>
+                </button>
+                <button class="menu-item" data-tab="settings">
+                    <span class="menu-icon">🛡️</span>
+                    <span class="menu-label">Rules & Safety</span>
+                </button>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="footer-info">
+                    <span class="v-tag">v2.0.0</span>
+                    <span class="admin-badge">ADMIN</span>
+                </div>
+                <button class="exit-btn" id="exitAppBtn">
+                    <span class="exit-icon">🚪</span>
+                    <span>Exit Application</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Window Area -->
+        <main class="main-content">
+            <!-- Header bar -->
+            <header class="main-header">
+                <div class="header-title">
+                    <h2 id="tabTitle">Dashboard</h2>
+                    <p id="tabSubtitle">Real-time system resource monitor</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-container" id="headerSearchContainer" style="display: none;">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="processSearch" placeholder="Search active processes...">
+                        <button class="search-clear-btn" id="searchClearBtn" style="display: none;">✕</button>
+                    </div>
+                    
+                    <button class="btn btn-secondary" id="refreshBtn">
+                        <span class="btn-icon">⟳</span>
+                        <span class="btn-text">Refresh</span>
+                    </button>
+                    
+                    <button class="btn btn-safe" id="modeToggleBtn">
+                        <span class="btn-icon">🛡️</span>
+                        <span class="btn-text">Safe Mode</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Scrollable Content Frame -->
+            <div class="content-frame">
+                
+                <!-- Tab: Dashboard -->
+                <section class="tab-content active" id="tab-dashboard">
+                    <!-- Resource Metric Row -->
+                    <div class="metric-row">
+                        <div class="metric-card card-ram">
+                            <div class="card-glow"></div>
+                            <div class="metric-header">
+                                <h3>RAM Memory</h3>
+                                <span class="metric-icon">💾</span>
+                            </div>
+                            <div class="metric-body">
+                                <div class="metric-value" id="ramValue">0.0 / 0.0 GB</div>
+                                <div class="metric-percentage" id="ramPercent">0%</div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="ramProgressBar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card card-cpu">
+                            <div class="card-glow"></div>
+                            <div class="metric-header">
+                                <h3>CPU Usage</h3>
+                                <span class="metric-icon">⚡</span>
+                            </div>
+                            <div class="metric-body">
+                                <div class="metric-value" id="cpuValue">0.0%</div>
+                                <div class="metric-percentage" id="cpuPercent">0%</div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar accent-purple" id="cpuProgressBar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card card-procs">
+                            <div class="card-glow"></div>
+                            <div class="metric-header">
+                                <h3>Active Processes</h3>
+                                <span class="metric-icon">🧩</span>
+                            </div>
+                            <div class="metric-body">
+                                <div class="metric-value" id="procCountValue">0</div>
+                                <div class="metric-percentage">Total</div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar accent-cyan" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts & Frozen apps split layout -->
+                    <div class="dashboard-grid">
+                        <div class="grid-card chart-container-card">
+                            <div class="grid-card-header">
+                                <h4>Resource History</h4>
+                                <span class="card-subtitle">Last 60 seconds</span>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="resourceChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="grid-card frozen-apps-card">
+                            <div class="grid-card-header">
+                                <h4>Suspended Apps</h4>
+                                <span class="card-subtitle">Currently frozen processes (0% CPU)</span>
+                            </div>
+                            <div class="frozen-list" id="frozenList">
+                                <div class="empty-state">
+                                    <span class="empty-icon">❄️</span>
+                                    <p>No suspended applications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Processes -->
+                <section class="tab-content" id="tab-processes">
+                    <!-- Filter and sorting bar -->
+                    <div class="filter-bar">
+                        <div class="filters-left">
+                            <span class="filter-label">Filter:</span>
+                            <div class="segmented-control">
+                                <button class="segment-btn active" data-filter="all">All</button>
+                                <button class="segment-btn" data-filter="pinned">Pinned</button>
+                                <button class="segment-btn" data-filter="suspended">Suspended</button>
+                                <button class="segment-btn" data-filter="scheduled">Scheduled</button>
+                            </div>
+                        </div>
+                        <div class="filters-right">
+                            <span class="filter-label">Sort by:</span>
+                            <select id="sortBySelect" class="styled-select">
+                                <option value="memory">RAM Usage</option>
+                                <option value="cpu">CPU Usage</option>
+                                <option value="name">Name</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Processes List -->
+                    <div class="process-list" id="processList">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </section>
+
+                <!-- Tab: Presets -->
+                <section class="tab-content" id="tab-presets">
+                    <div class="tab-section-header">
+                        <div>
+                            <h3>Custom Presets</h3>
+                            <p class="section-desc">Apply actions to multiple applications simultaneously with one click.</p>
+                        </div>
+                        <button class="btn btn-primary" id="newPresetBtn">+ New Preset</button>
+                    </div>
+
+                    <div class="presets-grid" id="presetsGrid">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </section>
+
+                <!-- Tab: Settings/Rules -->
+                <section class="tab-content" id="tab-settings">
+                    <div class="settings-container">
+                        <!-- RAM Threshold auto-suspend rule -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <div class="header-icon">🚨</div>
+                                <div class="header-info">
+                                    <h4>RAM Threshold Auto-Suspend</h4>
+                                    <p>Automatically suspend configured applications when RAM usage exceeds a set percentage.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="ramLimitToggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="settings-card-body" id="ramLimitSettings">
+                                <div class="setting-row">
+                                    <span class="setting-label">Threshold Percentage:</span>
+                                    <div class="range-container">
+                                        <input type="range" id="ramLimitSlider" min="50" max="95" value="80">
+                                        <span class="range-value" id="ramLimitSliderVal">80%</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-row list-row">
+                                    <span class="setting-label">Target Applications:</span>
+                                    <div class="app-selector-box">
+                                        <p class="box-desc">Select apps to auto-suspend. <small>(Note: Foreground protection will prevent suspending your active window)</small></p>
+                                        <div class="selector-chips" id="thresholdAppChips">
+                                            <!-- Chips loaded dynamically -->
+                                        </div>
+                                        <div class="selector-dropdown-row">
+                                            <select id="thresholdAppSelect" class="styled-select">
+                                                <option value="">-- Add App --</option>
+                                            </select>
+                                            <button class="btn btn-secondary btn-sm" id="addThresholdAppBtn">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- General App Safety & Settings -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <div class="header-icon">🛡️</div>
+                                <div class="header-info">
+                                    <h4>Safe Mode Shield</h4>
+                                    <p>Safe Mode protects critical Windows operating system files and background services from being paused.</p>
+                                </div>
+                                <div class="badge badge-safe">ACTIVE</div>
+                            </div>
+                            <div class="settings-card-body">
+                                <p class="setting-text">By default, Safe Mode prevents you from suspending or trimming system processes like <code>explorer.exe</code>, security agents, or hardware drivers. Turning off Safe Mode opens Advanced Mode, which allows managing all system processes. Use with caution.</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <div class="header-icon">💡</div>
+                                <div class="header-info">
+                                    <h4>Active App Protection</h4>
+                                    <p>Prevents freezing the application you are currently interacting with.</p>
+                                </div>
+                                <div class="badge badge-active">ALWAYS ON</div>
+                            </div>
+                            <div class="settings-card-body">
+                                <p class="setting-text">Whenever a RAM threshold rule triggers, CryoTask checks your active window title and process ID. If the active window matches an auto-suspend target, CryoTask skips it, ensuring your games, browsers, or code editors are never frozen while you are using them.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            
+            <!-- Global Status Bar -->
+            <footer class="footer-status-bar">
+                <div class="status-left">
+                    <span class="status-dot-pulse" id="statusDot"></span>
+                    <span id="statusBarText">● Ready</span>
+                </div>
+                <div class="status-right" id="statusMemorySummary">
+                    Total Memory Managed: 0.0 GB
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Modal: Schedule Rules Dialog -->
+    <div class="modal-backdrop" id="scheduleModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>⏰ Schedule Rules</h3>
+                <button class="modal-close-btn" onclick="closeModal('scheduleModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <h4 id="scheduleAppTitle">Application Name</h4>
+                <p class="modal-desc">Configure automatic RAM compression for this process group.</p>
+                
+                <div class="modal-section-card">
+                    <div class="section-card-header">
+                        <div class="info-group">
+                            <h5>⚡ Periodic Auto-Trim</h5>
+                            <p>Automatically trigger memory compression every few minutes.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="periodicTrimToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="section-card-body" id="periodicTrimSettings">
+                        <div class="setting-row">
+                            <span class="setting-label">Interval:</span>
+                            <div class="input-group">
+                                <input type="number" id="periodicTrimInterval" min="1" max="120" value="15">
+                                <span class="input-suffix">minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-tips">
+                    <span class="tip-icon">💡</span>
+                    <p>Periodic memory trimming uses safe Windows APIs to force apps to release inactive memory cache back to the system without pausing execution.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('scheduleModal')">Cancel</button>
+                <button class="btn btn-primary" id="saveScheduleBtn">Save Rules</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Create/Edit Preset -->
+    <div class="modal-backdrop" id="presetModal">
+        <div class="modal-card modal-large">
+            <div class="modal-header">
+                <h3 id="presetModalTitle">Create Preset</h3>
+                <button class="modal-close-btn" onclick="closeModal('presetModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="presetNameInput">Preset Name:</label>
+                    <input type="text" id="presetNameInput" placeholder="e.g., Gaming Mode, Development, Clean RAM">
+                </div>
+                
+                <div class="preset-builder-grid">
+                    <!-- Left: Select App and Action -->
+                    <div class="builder-side">
+                        <h4>Add Application</h4>
+                        <div class="form-group">
+                            <label for="presetAppSelect">Process:</label>
+                            <select id="presetAppSelect" class="styled-select">
+                                <option value="">-- Choose Running App --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="presetActionSelect">Action:</label>
+                            <select id="presetActionSelect" class="styled-select">
+                                <option value="Suspend">⏸ Suspend</option>
+                                <option value="Trim">⚡ Trim</option>
+                                <option value="Trim & Suspend">⚡ & ⏸ Trim & Suspend</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary btn-full" id="addAppToPresetBtn">Add to List</button>
+                    </div>
+                    
+                    <!-- Right: Apps in Preset -->
+                    <div class="builder-list-side">
+                        <h4>Actions in Preset</h4>
+                        <div class="builder-list" id="presetAppsList">
+                            <div class="empty-state">
+                                <p>No actions added yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('presetModal')">Cancel</button>
+                <button class="btn btn-primary" id="savePresetBtn">Save Preset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Modal (Custom confirm/warn dialog) -->
+    <div class="modal-backdrop modal-alert" id="alertModal">
+        <div class="modal-card modal-small">
+            <div class="modal-header">
+                <h3 id="alertTitle">Warning</h3>
+                <button class="modal-close-btn" onclick="closeModal('alertModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert-icon" id="alertIcon">⚠️</div>
+                <p id="alertMessage">Alert message goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="alertCancelBtn">Cancel</button>
+                <button class="btn btn-danger" id="alertConfirmBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Entry -->
+    <script src="app.js"></script>
+</body>
+</html>
